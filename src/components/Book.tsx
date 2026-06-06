@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 9; // intro + 6 nových strán + chapters + photo + záver
+  const totalPages = chapters.length + 10; // intro + 7 nových strán + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -216,9 +216,24 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 8 */}
+        <BookPage number={8} side="right">
+          <div className="space-y-3">
+            {[
+              "Iveta, nechal som tu proste aj veci, ktoré som písal o tom, ako som cítil, ktoré boli proste staršieho dátumu — teda čerstvo po tom, čo som to pokašľal. A budú to ďalšie od tejto strany. Naozaj chcem byť k tebe úprimný a myslím to úplne vážne. A chcem, aby si videla a vedela, že už nikdy ti nebudem nič zatĺkať alebo zľahčovať nejakú situáciu, ktorá je vážna alebo môže sa stať vážnou.",
+              "Naozaj by som dal čokoľvek za tú možnosť, aby si videla, že už si ťa vážim a že už viem, čo to je prísť o niekoho dôležitého a byť tým vinný. Naozaj je mi ľúto, ako som to celé bral na ľahkú váhu a ako som ťa bral ako samozrejmosť, akoby si nič nebola. Naozaj mi je ľúto, že som nemyslel aj na tvoje pocity a že som nebol viac zodpovedný a nebral ťa viac a nevážil si ťa viacej. Pritom som si namýšľal, že som dokonalý a robím všetko pre teba a neviem čo všetko možné — a realita bola úplný opak toho. A veľmi to ľutujem.",
+              "A veľmi mi chýbaš každý deň. Naozaj veľmi, veľmi, veľmi. Pri predstave, aký je dátum, keď som proste mal v hlave, že tento dátum — no, keď skončíš školu, že sa niekde vydáme spolu — a nakoniec sedím depresiák v aute v Kežmarku. Toto je realita toho, že som to pokazil len ja. Naozaj nikdy v živote by som ti neprial nič zlé a nechcel ti nijakým spôsobom ublížiť a už nikdy spôsobiť nejaké trápenie, čomu môžeš naozaj veriť, lebo to, ako mi je teraz tie tri mesiace, by som nikdy nikomu naozaj neprial nič podobné. A už nechcem vrátiť do týchto pocitov a stavov, ktoré som si sám zavinil tým, ako som si nevážil to, čo mám, a nepristupoval som k tomu zodpovedne.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 8} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 9} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
