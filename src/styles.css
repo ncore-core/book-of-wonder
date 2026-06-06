@@ -198,9 +198,25 @@
 .stf__parent {
   margin: 0 auto;
   filter: drop-shadow(0 25px 40px oklch(0 0 0 / 0.35));
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
 }
 .stf__block {
   border-radius: 4px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+.stf__block.stf__flipping {
+  transition: transform 0.15s ease-out;
+}
+.stf__block .shadow {
+  transition: opacity 0.25s ease;
+}
+.stf__block .hard {
+  transition: box-shadow 0.2s ease;
 }
 .page-shell {
   background: var(--gradient-paper);
