@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 8; // intro + 5 nových strán + chapters + photo + záver
+  const totalPages = chapters.length + 9; // intro + 6 nových strán + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -199,9 +199,26 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 7 */}
+        <BookPage number={7} side="left">
+          <div className="space-y-3">
+            {[
+              "Ivetka, chcel by som ti povedať, že neskutočne veľmi ľutujem všetky tie veci, ktorými som ťa veľmi musel uraziť a veľmi ti ublížiť a sám seba zmeniť v tvojich očiach na niečo hrozné. Ale samozrejme, že ľutujem aj tie veci, čo som povedal a ktoré zapríčinili tento spád. A taktiež ľutujem celkovo všetky veci, ktoré sa stali a ktoré som povedal za celé obdobie, čo ťa poznám — ktoré je pre mňa jedno z tých najdôležitejších — a ja som si ho zničil svojím debilným chovaním a tým, že som nevedel byť ten úprimný a riešiť svoje problémy.",
+              "Ver, že všetko to, čo som ti napísal za tie tri mesiace, všetko to zlé — že to naozaj ľutujem. A uvedomujem si vážnosť toho, čo som napísal. Čítam si to naozaj každý večer skoro a je mi z toho naozaj zle, že som to dokázal napísať práve tebe. Ale bolo by mi na nič aj keby som to napísal niekomu inému, lebo je to úplne hrozné a hanbím sa za to. Ale bohužiaľ, je to moje a napísal som to ja. Chcel by som sa ti veľmi ospravedlniť za toto všetko — chovanie, stavy, paniky a záchvaty, pri ktorých som písal ako blázon.",
+              "A naozaj sa denne modlím, každé ráno keď sa zobudím, že uvidím správu od teba, alebo zmeškaný hovor, alebo prichádzajúci — lebo nedokážem normálne žiť s vedomím, že som prišiel o teba, o tú najlepšiu osobu v mojom živote, a že som ti takto hrozne ublížil a hrozným spôsobom ťa urazil a zhodil, ako keby som si ťa vôbec ani nevážil. A ľutujem ten moment, keď som si vôbec dovolil povedať niečo také a napísať niečo také. A viem, že nie je ospravedlnenie to, v akom stave som to písal a v akých pocitoch som to písal. A viem, že nikdy by som neurobil túto chybu.",
+              "A ľutujem to, že toľko šancí som premárnil na hnusný alkohol, ktorý už ani nepijem a nepamätám si, kedy naposledy som si vôbec dal pivo alebo mal chuť na pivo. A nevieš si predstaviť, ako veľmi ľutujem všetky tie momenty a premárnené šance na hlúpy alkohol, pri ktorom som kvázi len naťahoval to, čo sa stalo naposledy. Teraz by som chcel, aby si vedela, že neskutočne veľmi to ľutujem a naozaj sa tým veľmi trápim, lebo viem, že to je len moja vina, za ktorú si dávam sám vinu. A chápem to, že som to prehnal.",
+              "A neskutočne veľmi dúfam, že sa mi naozaj ozveš a dáš mi len tú možnosť rozhovoru, aby som ti mohol úprimne a zodpovedne odpovedať na všetky tvoje otázky a povedať všetko, čo sa dialo a prečo som bol taký — a to všetko zo srdca a pravdivo, a pritom sa ti pozerať do očí. Viem, ako to musí vyzerať poslednú dobu, keď si všímaš moje správy náhodou. A úprimne — dnes som na tom vôbec veľmi dobre, ale neviem v zmysle tom, že by som teraz chodil ako nejaký seriálov. Ale naozaj mi je hrozne a nedokážem sa pohnúť ďalej, čo beriem asi ako nejaký typ trestu za to, aký som bol za celé tie štyri roky. Proste nedokážem rozmýšľať nad ničím iným a stále mi ide v hlave len to, ako som ti ublížil a napísal všetky tie svinstvá, za ktoré môžem ja tým, že som bol zbabelec.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 7} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 8} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
