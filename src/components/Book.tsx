@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 4; // intro + nová strana + chapters + photo + záver
+  const totalPages = chapters.length + 5; // intro + 2 nové strany + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -137,9 +137,25 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 3 */}
+        <BookPage number={3} side="left">
+          <div className="space-y-3">
+            {[
+              "Ivet, prosím ťa, toto som ti spravil len ako kvázi prezentačnú formu toho, ako mi to je naozaj ľúto. Neviem sa s tebou už nijak spojiť a povedať ti, ako ma to veľmi mrzí, čo všetko som ti spravil a koľko vecí sa stalo len kvôli tomu, že som nevedel proste počkať a byť viac trpezlivý a nechať ťa vychladnúť, keď proste situácia bola vyhrotená. A vyhrotená bola len a len kvôli mne, lebo som nevedel proste byť viac dospelý a komunikovať na úrovni dospelého.",
+              "Prepáč, že som bol toľkokrát taký precitlivený, alebo som si myslel, že mi chceš zle, pritom ty si bola vždy tá, čo chcela len dobre a pomôcť. Nechal som tu viacero útržkov z viacerých dní, ktoré sú tu dokonca zo začiatkov — teda asi zhruba tri mesiace staré. Veľmi mi je smutno za tebou, denne ľutujem to, čo som ti spôsobil, a pociťujem prázdnotu po tebe.",
+              "Hrozne ma trápi, že toľko šancí od teba som dostal a že väčšina bola kvôli hlúpemu alkoholu, ktorý som nikdy ani nemal piť, ani som ho nezvládol. A ľutujem, že si mi nedala takúto lekciu alebo ešte neviem čo to je, ale kvázi že si toto nespravila hneď na začiatku, keď som si vypil a bol ako kretén. Vtedy by som potreboval tú lekciu, aby som pochopil skôr, o čo som prišiel a čo si pre mňa bola.",
+              "Je mi ľúto, že toľkokrát som ťa bral ako nejakú samozrejmosť a nie ako super partnerku, kamarátku, ktorá mi vždy chcela pomôcť a byť pre mňa. Mrzí ma, že som sa nesnažil viac hlavne po tej stránke ako tvoj partner. A mrzí ma, že už aj ako kamarát kvázi som nedokázal byť k tebe úprimný a povedať ti všetky moje problémy a starosti, keď si sama toľkokrát pýtala a chcela a zaujímala si sa. Čo by som teraz dal všetko na svete.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 3} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 4} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">

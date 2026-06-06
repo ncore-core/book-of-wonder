@@ -208,15 +208,32 @@
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  /* Fix flicker during clip-path page flip: match page background */
+  background: var(--gradient-paper);
+  background-color: oklch(0.96 0.022 85);
+}
+.stf__block .stf__item {
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  background: var(--gradient-paper);
+  background-color: oklch(0.96 0.022 85);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.stf__block .stf__item.--simple {
+  background: var(--gradient-paper);
+  background-color: oklch(0.96 0.022 85);
 }
 .stf__block.stf__flipping {
   transition: transform 0.15s ease-out;
 }
-.stf__block .shadow {
+.stf__block .shadow,
+.stf__outerShadow,
+.stf__innerShadow,
+.stf__hardShadow,
+.stf__hardInnerShadow {
   transition: opacity 0.25s ease;
-}
-.stf__block .hard {
-  transition: box-shadow 0.2s ease;
+  pointer-events: none;
 }
 .page-shell {
   background: var(--gradient-paper);
