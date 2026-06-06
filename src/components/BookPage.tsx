@@ -44,7 +44,7 @@ export const BookPage = forwardRef<HTMLDivElement, Props>(function BookPage(
 
         {number !== undefined && (
           <footer className="mt-3 flex items-center justify-between border-t border-ink/15 pt-2 font-display text-xs uppercase tracking-[0.35em] text-ink/55">
-            <span>Ospravlnienie</span>
+            <span>Ospravedlnenie</span>
             <span>· {number} ·</span>
           </footer>
         )}

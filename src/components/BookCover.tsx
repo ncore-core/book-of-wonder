@@ -35,7 +35,7 @@ export function BookCover({ onOpen }: Props) {
 
           <div className="space-y-4">
             <h1 className="font-display text-5xl font-semibold leading-tight text-gold sm:text-6xl" style={{ textShadow: "0 2px 12px oklch(0 0 0 / 0.6)" }}>
-              Ospravlnienie
+              Ospravedlnenie
             </h1>
             <div className="mx-auto h-px w-24 bg-gold/60" />
             <p className="font-serif text-base italic text-gold/70 sm:text-lg">

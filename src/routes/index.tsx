@@ -8,13 +8,13 @@ import { Book } from "@/components/Book";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ospravlnienie — list, ktorý prišiel neskoro" },
+      { title: "Ospravedlnenie — list, ktorý prišiel neskoro" },
       {
         name: "description",
         content:
           "Tichá interaktívna kniha o ospravedlnení. Otvorte ju a listujte piatimi kapitolami.",
       },
-      { property: "og:title", content: "Ospravlnienie" },
+      { property: "og:title", content: "Ospravedlnenie" },
       {
         property: "og:description",
         content: "Interaktívna kniha — otvorte ju a listujte.",

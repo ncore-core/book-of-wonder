@@ -101,7 +101,7 @@ export const PhotoPage = forwardRef<HTMLDivElement, Props>(function PhotoPage(
         </div>
 
         <footer className="relative mt-3 flex items-center justify-between border-t border-ink/15 pt-2 font-display text-xs uppercase tracking-[0.35em] text-ink/55">
-          <span>Ospravlnienie</span>
+          <span>Ospravedlnenie</span>
           <span>· nástenka ·</span>
         </footer>
       </div>
