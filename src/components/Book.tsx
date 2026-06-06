@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 14; // intro + 11 nových strán + chapters + photo + záver
+  const totalPages = chapters.length + 15; // intro + 12 nových strán + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -280,6 +280,22 @@ export function Book({ onClose }: Props) {
         <BookPage number={12} side="right">
           <div className="space-y-3">
             {[
+              "A veľmi ľutujem to, koľko si odo mňa pýtala niečo, a že som to nedokázal spraviť. A veľmi — ale že veľmi — ma to mrzí, lebo ty si bola tá, čo mi dala nový dych tým, že mi kúpila kurz od Marka, ktorý stál celý film mesačný príjem, ktorý si dostávala na život. A veľmi si to vážim, aj keď som to možno nikdy nedal priamo najavo, ale bol to ten najlepší darček v mojom živote.",
+              "A je mi hrozne z toho, že som ti nedokázal skôr dokončiť to, čo si chcela. Len toľkokrát som to načal a ani nedokázal to ťahať dopredu a nútiť ťa to dokončiť. A veľmi ľutujem, že som to dokončil už keď bolo neskoro a že už si stratila záujem v to. A beriem to ako hroznú lekciu toho môjho hrozného prístupu a toho, že som si ťa mal vážiť oveľa viacej a dávať to oveľa viacej najavo.",
+              "A sľubujem ti, že hocikedy som pripravený ti s tým pomôcť a spustiť to do niekoľkých hodín do prevádzky. A budem ti s tým pomáhať do konca, jak len dlho budeš chcieť. Som ti vďačný za to všetko, čo si mi dala. Sú to neskutočne veľmi pekné pocity a spomienky. A mrzí ma, že som ti na narodeniny nič nedal, aj keď som veľmi chcel. Že som bol taký debil, debilný, a je mi to veľmi ľúto, že som to takto spravil ako nevďačný parchant. To naozaj veľmi ľúto.",
+              "A viem, že to nič neznamená, že mi je ľúto toto. A chápem, že sa mi už asi zrejme nedá ani odpustiť a pozrieť sa na mňa. A potom naozaj — si tá najlepšia žena. Nikto nemôže mať väčšie šťastie ako ten, čo ťa má po boku.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
+        {/* Nová strana č. 13 */}
+        <BookPage number={13} side="left">
+          <div className="space-y-3">
+            {[
               "Iveta, nechal som tu proste aj veci, ktoré som písal o tom, ako som cítil, ktoré boli proste staršieho dátumu — teda čerstvo po tom, čo som to pokašľal. A budú to ďalšie od tejto strany. Naozaj chcem byť k tebe úprimný a myslím to úplne vážne. A chcem, aby si videla a vedela, že už nikdy ti nebudem nič zatĺkať alebo zľahčovať nejakú situáciu, ktorá je vážna alebo môže sa stať vážnou.",
               "Naozaj by som dal čokoľvek za tú možnosť, aby si videla, že už si ťa vážim a že už viem, čo to je prísť o niekoho dôležitého a byť tým vinný. Naozaj je mi ľúto, ako som to celé bral na ľahkú váhu a ako som ťa bral ako samozrejmosť, akoby si nič nebola. Naozaj mi je ľúto, že som nemyslel aj na tvoje pocity a že som nebol viac zodpovedný a nebral ťa viac a nevážil si ťa viacej. Pritom som si namýšľal, že som dokonalý a robím všetko pre teba a neviem čo všetko možné — a realita bola úplný opak toho. A veľmi to ľutujem.",
               "A veľmi mi chýbaš každý deň. Naozaj veľmi, veľmi, veľmi. Pri predstave, aký je dátum, keď som proste mal v hlave, že tento dátum — no, keď skončíš školu, že sa niekde vydáme spolu — a nakoniec sedím depresiák v aute v Kežmarku. Toto je realita toho, že som to pokazil len ja. Naozaj nikdy v živote by som ti neprial nič zlé a nechcel ti nijakým spôsobom ublížiť a už nikdy spôsobiť nejaké trápenie, čomu môžeš naozaj veriť, lebo to, ako mi je teraz tie tri mesiace, by som nikdy nikomu naozaj neprial nič podobné. A už nechcem vrátiť do týchto pocitov a stavov, ktoré som si sám zavinil tým, ako som si nevážil to, čo mám, a nepristupoval som k tomu zodpovedne.",
@@ -293,7 +309,7 @@ export function Book({ onClose }: Props) {
 
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 13} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 14} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
