@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 5; // intro + 2 nové strany + chapters + photo + záver
+  const totalPages = chapters.length + 6; // intro + 3 nové strany + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -153,9 +153,24 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 4 */}
+        <BookPage number={4} side="right">
+          <div className="space-y-3">
+            {[
+              "Ivetka, verím tomu, že som ťa musel hrozne sklamať tým, ako si čítala — ak si čítala — tie správy a veci ohľadom mojej rodiny a podobne. Veľmi prosím ťa, že toto sú jedny z najhorších vecí, ktoré prežívam. A vstáva sa mi to fakt väčšinou večer a už skoro vždy, že normálne počujem, jak mi niekto chce zle, alebo jak ma ľudia ohovárajú, alebo sa mi posmievajú. A neustále počujem tie čudné hlasy v hlave so všetkými tými výčitkami a bolesťami.",
+              "Že som neskutočne hrozný človek, ktorý urobil neskutočne hrozné veci a veľmi ma to ničí. A normálne mám už z toho traumu a nočné mory — normálne bojím toho, čo príde, alebo čo sa deje. A som taký unavený, až sa mi chce vypnúť. Je mi naozaj hrozne z toho, čo som tam písal, ale potom som aj napísal a priznal to, že to môžu byť len moje halucinácie alebo že si to úplne domýšľam z toho ticha, čo je doma, keď je noc.",
+              "Naozaj viem, že ak si to čítala, tak ťa to muselo veľmi zaraziť. A mrzí ma, že si o mne musíš asi zrejme myslieť, že som nejaký falošný parchant alebo neviem niečo podobné. Ale veľmi ťa prosím, ja nechcem naozaj nikomu zle. A je mi naozaj extrémne hrozne a cítim sa normálne tak opustene a sám. Prepáč mi, že to takto muselo vyzerať, a nechcem, aby si o mne musela myslieť tieto veci.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 4} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 5} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
