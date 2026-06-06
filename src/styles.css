@@ -1,0 +1,227 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-paper: var(--paper);
+  --color-paper-edge: var(--paper-edge);
+  --color-ink: var(--ink);
+  --color-leather: var(--leather);
+  --color-gold: var(--gold);
+  --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Atmosféra: teplá, domáca, neutrálna */
+  --background: oklch(0.94 0.012 75);
+  --foreground: oklch(0.22 0.02 50);
+
+  --card: oklch(0.97 0.01 80);
+  --card-foreground: oklch(0.22 0.02 50);
+  --popover: oklch(0.97 0.01 80);
+  --popover-foreground: oklch(0.22 0.02 50);
+
+  --primary: oklch(0.38 0.06 45);
+  --primary-foreground: oklch(0.97 0.01 80);
+  --secondary: oklch(0.88 0.02 70);
+  --secondary-foreground: oklch(0.25 0.03 45);
+
+  --muted: oklch(0.9 0.015 70);
+  --muted-foreground: oklch(0.45 0.02 55);
+  --accent: oklch(0.78 0.08 60);
+  --accent-foreground: oklch(0.22 0.02 50);
+
+  --destructive: oklch(0.55 0.18 28);
+  --destructive-foreground: oklch(0.98 0.005 80);
+
+  --border: oklch(0.82 0.02 65);
+  --input: oklch(0.82 0.02 65);
+  --ring: oklch(0.55 0.08 55);
+
+  /* Knižné tokeny */
+  --paper: oklch(0.96 0.022 85);
+  --paper-edge: oklch(0.86 0.04 75);
+  --ink: oklch(0.24 0.025 45);
+  --leather: oklch(0.32 0.05 38);
+  --gold: oklch(0.78 0.13 80);
+
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", serif;
+
+  --shadow-book: 0 30px 80px -20px oklch(0 0 0 / 0.45),
+    0 10px 30px -10px oklch(0 0 0 / 0.35);
+  --gradient-room: radial-gradient(
+      ellipse at 50% 30%,
+      oklch(0.96 0.015 80) 0%,
+      oklch(0.88 0.025 65) 45%,
+      oklch(0.72 0.03 55) 100%
+    );
+  --gradient-leather: linear-gradient(
+    135deg,
+    oklch(0.36 0.055 38),
+    oklch(0.26 0.045 35) 50%,
+    oklch(0.32 0.05 38)
+  );
+  --gradient-paper: linear-gradient(
+    180deg,
+    oklch(0.97 0.018 85) 0%,
+    oklch(0.94 0.028 80) 100%
+  );
+}
+
+.dark {
+  --background: oklch(0.18 0.02 45);
+  --foreground: oklch(0.95 0.01 80);
+  --card: oklch(0.22 0.025 45);
+  --card-foreground: oklch(0.95 0.01 80);
+  --paper: oklch(0.92 0.025 80);
+  --ink: oklch(0.22 0.02 45);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    background: var(--gradient-room);
+    color: var(--color-foreground);
+    font-family: var(--font-serif);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+}
+
+/* --- Custom keyframes --- */
+@keyframes ambient-float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.35; }
+  50% { transform: translateY(-30px) translateX(15px); opacity: 0.65; }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.05); }
+}
+@keyframes ink-write {
+  from { stroke-dashoffset: 800; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes book-arrive {
+  0% { transform: perspective(2000px) rotateX(45deg) translateY(120px) scale(0.6); opacity: 0; filter: blur(20px); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { transform: perspective(2000px) rotateX(0) translateY(0) scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes cover-open {
+  0% { transform: rotateY(0); }
+  100% { transform: rotateY(-170deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-ambient { animation: ambient-float 9s ease-in-out infinite; }
+.animate-glow { animation: glow-pulse 4s ease-in-out infinite; }
+.animate-arrive { animation: book-arrive 1.6s cubic-bezier(.2,.8,.2,1) both; }
+
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    oklch(0.95 0.05 90) 50%,
+    var(--gold) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.bg-leather { background: var(--gradient-leather); }
+.bg-paper { background: var(--gradient-paper); }
+
+.paper-texture {
+  background-image:
+    radial-gradient(oklch(0.7 0.04 65 / 0.07) 1px, transparent 1px),
+    radial-gradient(oklch(0.5 0.04 50 / 0.05) 1px, transparent 1px);
+  background-size: 24px 24px, 17px 17px;
+  background-position: 0 0, 12px 8px;
+}
+
+.book-shadow { box-shadow: var(--shadow-book); }
+
+.spine-decor::before,
+.spine-decor::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 60%;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0.55;
+  transform: translateX(-50%);
+}
+.spine-decor::before { top: 14%; }
+.spine-decor::after { bottom: 14%; }
+
+/* react-pageflip overrides */
+.stf__parent {
+  margin: 0 auto;
+  filter: drop-shadow(0 25px 40px oklch(0 0 0 / 0.35));
+}
+.stf__block {
+  border-radius: 4px;
+}
+.page-shell {
+  background: var(--gradient-paper);
+  color: var(--ink);
+  height: 100%;
+  width: 100%;
+  padding: 2.2rem 2rem;
+  font-family: var(--font-serif);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.page-shell.left  { box-shadow: inset -25px 0 35px -25px oklch(0 0 0 / 0.45); }
+.page-shell.right { box-shadow: inset 25px 0 35px -25px oklch(0 0 0 / 0.45); }
+
+@media (max-width: 640px) {
+  .page-shell { padding: 1.25rem 1.1rem; }
+}
+
+@keyframes polaroid-sway {
+  0%, 100% { transform: rotate(-3.2deg) translateY(0); }
+  50%      { transform: rotate(-1.8deg) translateY(-3px); }
+}
