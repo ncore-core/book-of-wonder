@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 7; // intro + 4 nové strany + chapters + photo + záver
+  const totalPages = chapters.length + 8; // intro + 5 nových strán + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -184,9 +184,24 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 6 */}
+        <BookPage number={6} side="right">
+          <div className="space-y-3">
+            {[
+              "Ivet, ja viem, že počas tohto obdobia, ktoré je tak hnusne depresívne a škaredé — ale môžem si zaňho sám svojou vinou — som povedal a napísal veľa vecí, kde som sa aj priamo zo začiatku, keď som spravil najhoršiu a najväčšiu chybu môjho života, vyhrážal alebo kvázi dával najavo to, že chcem ukončiť život alebo si nejako ublížiť. Veľmi ľutujem, že takto proste znelo a že takéto pocity som ti dával, ktoré si už absolútne nezaslúžiš a nemal by som ich ani vypustiť z úst alebo napísať.",
+              "Neskôr som si ale všimol, že keď som si čítal nejaké veci po sebe, tak aj takéto správy dávali aj tento význam — áno, áno, áno. Chcel by som ti povedať, že v poslednom období, aj keď to možno dávalo takýto zmysel to, čo som napísal, tak som to tak naozaj nemyslel. A je mi veľmi ľúto, že som ti niečo také vôbec napísal. Pričom vina je len moja a môžem si za ňu len sám — svojím nechovaním, nezodpovedným správaním a tým, že som si život neplánoval viac dopredu a nevážil si to, čo mám. A to si bola ty — tá, ktorá pri mne vždy chcela stáť a pomáhať mi a išla by so mnou aj na koniec sveta.",
+              "A chcem, aby si vedela, že aj keď si možno postrehla — keď si vôbec čítala správy odo mňa — že je tam veľmi premenlivé chovanie, teda osobnostne, chcem ti povedať, že naozaj to nie je nič vážne. Je len proste to, že to nezvládam, a niekedy už neviem ovládať, keď to na mňa príde. A je to veľmi hrozné zažiť na vlastnej koži. A pamätám, koľkokrát si mi povedala, že máš úzkosť alebo depku, a ja som nechápal, ako to je možné, alebo z čoho to máš, a že to môže byť vôbec také vážne. Pritom teraz zisťujem, že to je niečo neskutočne hrozné. A hrozne ľutujem, že som si vôbec niekedy dovolil zasmiať sa nad tým, keď si to povedala, alebo to nebrať úplne vážne a nepristupovať k tomu ako partner, ktorý to berie vážne.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 6} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 7} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
