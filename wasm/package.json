@@ -1,0 +1,15 @@
+{
+  "name": "page-physics",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "page_physics_bg.wasm",
+    "page_physics.js",
+    "page_physics.d.ts"
+  ],
+  "main": "page_physics.js",
+  "types": "page_physics.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
