@@ -16,7 +16,7 @@ export function Book({ onClose }: Props) {
   const bookRef = useRef<any>(null);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState({ w: 520, h: 680 });
-  const totalPages = chapters.length + 6; // intro + 3 nové strany + chapters + photo + záver
+  const totalPages = chapters.length + 7; // intro + 4 nové strany + chapters + photo + záver
 
   // Mobile-first responzívne rozmery knihy
   useEffect(() => {
@@ -168,9 +168,25 @@ export function Book({ onClose }: Props) {
           </div>
         </BookPage>
 
+        {/* Nová strana č. 5 */}
+        <BookPage number={5} side="left">
+          <div className="space-y-3">
+            {[
+              "Ivet, viem že som napísal aj veľa vecí, ktorými som ťa obviňoval z mojich neúspechov alebo zlyhaní, a dával ti za vinu niečo, čo ani zďaleka nemôže byť nikoho iného vina, ako len moja. A hrozne mi je ľúto, že práve tebe som to dával za vinu a spôsobil ti tým veľkú bolesť — a pritom ty si bola tá, ktorá počas celého toho obdobia bola pri mne, vždy stála za mnou a chcela mi pomôcť a vždy myslela na moje dobro.",
+              "Je mi hrozne pri pomyslení na to, že ty si potom musela odniesť takéto hnusné slová a obvinenia z mojej strany, kde som ťa veľmi hnusne zhodil a dal som ti to, čo si rozhodne nezaslúžiš. A rozhodne som to nemal povedať nikomu a na nikoho iného dávať, ako len na seba a sebe dávať za vinu. A je mi veľmi ľúto, že som ti týmto ublížil a že som si dovolil niečo také, čo sa nedá ani len tak ľahko pochopiť.",
+              "A veľmi ma mrzí, že som bol k tebe takýto. Viem, že to nie je žiadne ospravedlnenie, ale prosím, cháp, že v poslednom období som na tom veľmi zle — čo takisto nie je žiadne ospravedlnenie, lebo ty si bola jediná, ktorá mi ponúkala možnosť a chcela a mala záujem sa so mnou porozprávať a pomôcť mi a chcela pochopiť, čo ma trápi. A pritom ja som bol ten zbabelec, ktorý sa tváril, že mu nič nie je a nemá žiadny problém a že je dokonalý. A to veľmi ľutujem.",
+              "Že som sa s tebou — ako jedinou osobou, na ktorej mi takto záleží a bez ktorej som tri mesiace a cítim sa úplne najhoršie za celý život — nedokázal ani poradiť a povedať jej, teda tebe, čo ma skutočne trápi, a nechať si pomôcť. Aj to veľmi ľutujem, Ivetka, že som ti týmto ublížil a bol takýto k tebe.",
+            ].map((p, j) => (
+              <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
+                {p}
+              </p>
+            ))}
+          </div>
+        </BookPage>
+
         {chapters.flatMap((ch, i) => {
           const pages = [
-            <BookPage key={`ch-${i}`} number={i + 5} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
+            <BookPage key={`ch-${i}`} number={i + 6} title={ch.title} side={i % 2 === 0 ? "left" : "right"}>
               <div className="space-y-3">
                 {ch.paragraphs.map((p, j) => (
                   <p key={j} className="text-justify first-letter:font-display first-letter:text-3xl first-letter:font-semibold first-letter:text-leather">
