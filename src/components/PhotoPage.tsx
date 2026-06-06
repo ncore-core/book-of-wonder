@@ -1,108 +1,79 @@
 import { forwardRef } from "react";
-import photo0 from "@/assets/ivetka-zajko.svg";
-import photo1 from "@/assets/IMG_0076.svg";
-import photo2 from "@/assets/IMG_0933.svg";
-import photo3 from "@/assets/IMG_1189.svg";
+import zajkoPhoto from "@/assets/IMG_20260603_174725172.jpg";
 
 interface Props {
   caption?: string;
   side?: "left" | "right";
 }
 
-const photos = [
-  { src: photo0, caption: "zajko — tichá spomienka", rotate: -6, delay: 0 },
-  { src: photo1, caption: "tie chvíle", rotate: 4.5, delay: 0.8 },
-  { src: photo2, caption: "spomienka", rotate: -3, delay: 1.6 },
-  { src: photo3, caption: "navždy", rotate: 5.5, delay: 2.4 },
-];
+const rightColText =
+  "ivet toto je to naše trdlo ušate ak budeš niekedy chcete s ním stráviť chvíľou tak kľudne daj vedieť donesiem ti ho alebo ak bude pretrvávať tvoja nechuť vo mna tak si ho OK kľudne pošlem po niekom na víkend alebo ako budeš potrebovať alebo chcieť";
 
-/** Strana ako nástenka — viaceré polaroidy pripnuté špendlíkmi. */
+const bottomText =
+  "nechcem aby mojou chybou si to odniesol ešte Bubo alebo tým tým že budeš mať znemožnené sa s ním stretnúť alebo tiež ho mať keďže to je spoločné a veľmi ľutujem že som to musel takto zničiť a aby sa toto stalo";
+
 export const PhotoPage = forwardRef<HTMLDivElement, Props>(function PhotoPage(
-  _props,
+  { caption = "zajko — tichá spomienka" },
   ref,
 ) {
   return (
     <div ref={ref} className="paper-texture">
-      <div
-        className="page-shell right relative overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, oklch(0.72 0.06 65 / 0.4), oklch(0.55 0.05 50 / 0.28)), repeating-linear-gradient(45deg, oklch(0.45 0.06 45 / 0.07) 0 2px, transparent 2px 8px)",
-        }}
-      >
-        {/* korková textúra */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-60"
-          style={{
-            backgroundImage:
-              "radial-gradient(oklch(0.35 0.05 45 / 0.18) 1px, transparent 1px), radial-gradient(oklch(0.25 0.04 40 / 0.15) 1px, transparent 1px)",
-            backgroundSize: "11px 11px, 17px 17px",
-            backgroundPosition: "0 0, 6px 8px",
-          }}
-        />
-
+      <div className="page-shell right relative flex flex-col overflow-hidden">
         <header className="relative mb-3 border-b border-ink/15 pb-2">
           <p className="font-display text-xs uppercase tracking-[0.4em] text-ink/55">
-            Nástenka
+            Spomienka
           </p>
-          <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-            Spomienky
+          <h2 className="font-display text-2xl font-semibold text-ink">
+            Na trdlo ušaté
           </h2>
         </header>
 
-        <div className="relative flex flex-1 items-center justify-center">
-          <div className="grid w-full grid-cols-2 gap-3 px-1 sm:gap-4">
-            {photos.map((p, i) => (
+        <div className="flex flex-1 flex-col gap-3">
+          <div className="flex gap-4">
+            {/* Left column — photo frame */}
+            <div className="w-[42%] shrink-0">
               <div
-                key={i}
-                className="relative flex items-center justify-center"
+                className="rounded-sm bg-[oklch(0.97_0.02_85)] p-1.5 pb-5 shadow-xl"
                 style={{
-                  transform: `rotate(${p.rotate}deg)`,
-                  animation: `polaroid-sway ${7 + i}s ease-in-out ${p.delay}s infinite`,
+                  boxShadow:
+                    "0 10px 22px -8px oklch(0 0 0 / 0.55), 0 3px 8px oklch(0 0 0 / 0.22)",
                 }}
               >
-                {/* špendlík */}
-                <span
-                  aria-hidden
-                  className="absolute left-1/2 -top-1.5 z-20 h-3 w-3 -translate-x-1/2 rounded-full"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 30% 30%, oklch(0.85 0.18 25), oklch(0.45 0.18 25) 70%, oklch(0.25 0.12 25))",
-                    boxShadow:
-                      "0 2px 4px oklch(0 0 0 / 0.45), inset -1px -1px 2px oklch(0 0 0 / 0.3)",
-                  }}
+                <img
+                  src={zajkoPhoto}
+                  alt={caption}
+                  className="block h-auto w-full object-cover"
+                  style={{ aspectRatio: "3/4" }}
+                  loading="eager"
                 />
-                {/* polaroid */}
-                <div
-                  className="rounded-sm bg-[oklch(0.97_0.02_85)] p-1.5 pb-5 shadow-xl"
-                  style={{
-                    boxShadow:
-                      "0 10px 22px -8px oklch(0 0 0 / 0.55), 0 3px 8px oklch(0 0 0 / 0.22)",
-                  }}
+                <p
+                  className="mt-1 text-center text-[10px] text-ink/70"
+                  style={{ fontFamily: "'Caveat', 'Cormorant Garamond', serif" }}
                 >
-                  <img
-                    src={p.src}
-                    alt={p.caption}
-                    className="block h-auto w-full object-cover"
-                    style={{ aspectRatio: "3/4" }}
-                    loading="lazy"
-                  />
-                  <p
-                    className="mt-1 text-center text-[10px] text-ink/70"
-                    style={{ fontFamily: "'Caveat', 'Cormorant Garamond', serif" }}
-                  >
-                    {p.caption}
-                  </p>
-                </div>
+                  {caption}
+                </p>
               </div>
-            ))}
+            </div>
+
+            {/* Right column — text starting at top right of photo */}
+            <div className="flex-1">
+              <p className="font-serif text-justify text-sm leading-relaxed text-ink/85 sm:text-base">
+                {rightColText}
+              </p>
+            </div>
+          </div>
+
+          {/* Full-width text below the photo */}
+          <div className="w-full">
+            <p className="font-serif text-justify text-sm leading-relaxed text-ink/85 sm:text-base">
+              {bottomText}
+            </p>
           </div>
         </div>
 
-        <footer className="relative mt-3 flex items-center justify-between border-t border-ink/15 pt-2 font-display text-xs uppercase tracking-[0.35em] text-ink/55">
+        <footer className="relative mt-auto flex items-center justify-between border-t border-ink/15 pt-2 font-display text-xs uppercase tracking-[0.35em] text-ink/55">
           <span>Ospravedlnenie</span>
-          <span>· nástenka ·</span>
+          <span>· spomienka ·</span>
         </footer>
       </div>
     </div>
