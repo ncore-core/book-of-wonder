@@ -178,7 +178,23 @@
   background-position: 0 0, 12px 8px;
 }
 
-.book-shadow { box-shadow: var(--shadow-book); }
+.book-shadow {
+  box-shadow: var(--shadow-book);
+  /* Transformácia knihy je plynulá aj pri resize */
+  transition: box-shadow 0.4s ease;
+  /* Mikro-pohyb knihy – papier dýcha, akoby vážil a prirodzene
+     reagoval na zmeny vzduchu a polohy. Nesmierne jemný efekt */
+  animation: book-breathe 6s ease-in-out infinite;
+}
+
+/* Kniha jemne "dýcha" – mikro-pohyb, ktorý dodáva pocit
+   organickej hmoty a váhy papiera */
+@keyframes book-breathe {
+  0%, 100% { transform: perspective(1400px) rotateX(0) rotateY(0) translateY(0); }
+  25%      { transform: perspective(1400px) rotateX(0.04deg) rotateY(-0.03deg) translateY(-0.3px); }
+  50%      { transform: perspective(1400px) rotateX(-0.02deg) rotateY(0.02deg) translateY(0.2px); }
+  75%      { transform: perspective(1400px) rotateX(0.03deg) rotateY(-0.01deg) translateY(-0.15px); }
+}
 
 .spine-decor::before,
 .spine-decor::after {
@@ -194,16 +210,23 @@
 .spine-decor::before { top: 14%; }
 .spine-decor::after { bottom: 14%; }
 
-/* react-pageflip overrides */
+/* ---- react-pageflip overrides — pokročilá vrstva realizmu ---- */
+
+/* Celá kniha v 3D priestore — perspektíva pre dramatickejšie otáčanie */
 .stf__parent {
   margin: 0 auto;
-  filter: drop-shadow(0 25px 40px oklch(0 0 0 / 0.35));
+  filter: drop-shadow(0 30px 50px oklch(0 0 0 / 0.4));
   will-change: transform;
   -webkit-font-smoothing: antialiased;
+  /* Vložíme jemnú perspektívu pre celú knihu – hard pages vnímame v 3D */
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
 }
+
+/* Blok stránky – priestor, kde sa odohráva samotné otáčanie */
 .stf__block {
   border-radius: 4px;
-  will-change: transform, opacity;
+  will-change: transform, opacity, clip-path;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
@@ -211,7 +234,12 @@
   /* Fix flicker during clip-path page flip: match page background */
   background: var(--gradient-paper);
   background-color: oklch(0.96 0.022 85);
+  /* Zosilnená 3D perspektíva pre tvrdé strany (hard pages) */
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
 }
+
+/* Každá strana – zachovanie 3D a plynulé vykreslenie */
 .stf__block .stf__item {
   backface-visibility: visible;
   -webkit-backface-visibility: visible;
@@ -219,21 +247,53 @@
   background-color: oklch(0.96 0.022 85);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+  /* GPU akcelerácia pre plynulý clip-path a rotate */
+  will-change: transform, clip-path, opacity;
+  /* Vyhladenie okrajov počas preklopenia – antialiasing */
+  -webkit-font-smoothing: antialiased;
 }
 .stf__block .stf__item.--simple {
   background: var(--gradient-paper);
   background-color: oklch(0.96 0.022 85);
 }
+
+/* Fáza "folding" – keď používateľ chytí roh a ťahá ho */
 .stf__block.stf__flipping {
-  transition: transform 0.15s ease-out;
+  /* Prirodzenejší priebeh: pomalší začiatok (paper resistance),
+     potom zrýchlenie a jemné dobehnutie */
+  transition: transform 0.35s cubic-bezier(0.12, 0.74, 0.24, 1);
+  /* Počas folding fázy mierne stlmíme ostatné prechody */
+  filter: brightness(1.01);
 }
+
+/* Tiene – vyhladenie prechodov, ktoré library nastavuje priamo */
 .stf__block .shadow,
 .stf__outerShadow,
 .stf__innerShadow,
 .stf__hardShadow,
 .stf__hardInnerShadow {
-  transition: opacity 0.25s ease;
+  /* Library mení opacity v každom frame, ale toto zachytí
+     prípadné skoky pri zmene stavu (napr. z fold→flip→read) */
+  transition: opacity 0.1s ease;
   pointer-events: none;
+  /* Vyššia kvalita vykreslenia tieňa */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vonkajší tieň – jemnejšie rozpustenie */
+.stf__outerShadow {
+  mix-blend-mode: multiply;
+}
+
+/* Vnútorný tieň – hĺbka ohybu papiera */
+.stf__innerShadow {
+  mix-blend-mode: multiply;
+}
+
+/* Tvrdý tieň – pri hard pages */
+.stf__hardShadow,
+.stf__hardInnerShadow {
+  mix-blend-mode: multiply;
 }
 .page-shell {
   background: var(--gradient-paper);
@@ -246,9 +306,38 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  /* Hlbší tieň na hrane – papier pôsobí hrubšie */
 }
-.page-shell.left  { box-shadow: inset -25px 0 35px -25px oklch(0 0 0 / 0.45); }
-.page-shell.right { box-shadow: inset 25px 0 35px -25px oklch(0 0 0 / 0.45); }
+.page-shell.left  {
+  box-shadow:
+    inset -30px 0 40px -25px oklch(0 0 0 / 0.5),
+    inset -1px 0 0 oklch(0 0 0 / 0.04);
+}
+.page-shell.right {
+  box-shadow:
+    inset 30px 0 40px -25px oklch(0 0 0 / 0.5),
+    inset 1px 0 0 oklch(0 0 0 / 0.04);
+}
+
+/* Hrana papiera – jemný svetelný okraj počas otáčania */
+.stf__block .stf__item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Pri preklopení vznikne jemný odlesk na hrane – gradient simuluje
+     lom svetla na okraji listu papiera */
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(1 0 0 / 0.03) 40%,
+    oklch(1 0 0 / 0.06) 50%,
+    oklch(1 0 0 / 0.03) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+}
 
 @media (max-width: 640px) {
   .page-shell { padding: 1.25rem 1.1rem; }

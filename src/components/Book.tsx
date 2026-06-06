@@ -82,22 +82,22 @@ export function Book({ onClose }: Props) {
         minHeight={400}
         maxHeight={820}
         drawShadow
-        flippingTime={2200}
+        flippingTime={2800}
         usePortrait
         startPage={0}
         showCover={false}
         mobileScrollSupport={true}
-        maxShadowOpacity={0.65}
+        maxShadowOpacity={0.85}
         className="book-shadow"
         style={{}}
         startZIndex={0}
         autoSize
         clickEventForward
         useMouseEvents
-        swipeDistance={70}
+        swipeDistance={50}
         showPageCorners
         disableFlipByClick={false}
-        onFlip={(e: any) => setPage(e.data)}
+            onFlip={(e: any) => setPage(e.data)}
       >
         {/* Úvodná strana */}
         <BookPage side="right">
